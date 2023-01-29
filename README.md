@@ -1,0 +1,1 @@
+# next.js-ipfs-template
