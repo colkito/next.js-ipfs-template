@@ -1,0 +1,39 @@
+name: Depoy main branch to IPFS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Run build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build and optimize the code
+        run: yarn build
+
+      - name: Export production ready code
+        run: yarn export
+
+      - name: Upload to IPFS with Pinata
+        uses: aquiladev/ipfs-action@v0.3.1
+        id: pinata
+        with:
+          path: ./out
+          service: pinata
+          pinataKey: ${{ secrets.PINATA_KEY }}
+          pinataSecret: ${{ secrets.PINATA_SECRET }}
+          pinataPinName: ${{ secrets.PINATA_PIN_NAME }}
