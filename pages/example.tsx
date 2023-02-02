@@ -4,19 +4,19 @@ import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function About() {
+export default function Example() {
   return (
     <>
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
-            <code className={styles.code}>pages/about.tsx</code>
+            <code className={styles.code}>pages/example.tsx</code>
           </p>
         </div>
 
         <div className={styles.center}>
-          <p>About Page</p>
+          <p>Example Page</p>
         </div>
 
         <div className={styles.grid}>
@@ -24,7 +24,7 @@ export default function About() {
             <h2 className={inter.className}>
               Home <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>Test page routes with this link.</p>
+            <p className={inter.className}>Test navigation to home page with this link.</p>
           </Link>
 
           <Link href="/deploy" className={styles.card}>

@@ -61,11 +61,11 @@ export default function Home() {
         </div>
 
         <div className={styles.grid}>
-          <Link href="/about" className={styles.card}>
+          <Link href="/example" className={styles.card}>
             <h2 className={inter.className}>
-              About <span>-&gt;</span>
+              Example Page <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>Test page routes with this link.</p>
+            <p className={inter.className}>Test navigation to the example page with this link.</p>
           </Link>
 
           <Link href="/deploy" className={styles.card}>
