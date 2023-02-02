@@ -1,7 +1,7 @@
 {
   "name": "next.js-ipfs-template",
   "version": "0.1.0",
-  "description": "A template of Next.js static site ready to be deployed on IPFS",
+  "description": "A Next.js static site template ready to be deployed on IPFS",
   "main": "index.js",
   "repository": "git@github.com:colkito/next.js-ipfs-template.git",
   "author": "colkito <github@colkito.com>",
