@@ -34,6 +34,6 @@ jobs:
         with:
           path: ./out
           service: pinata
-          pinName: ${{ secrets.PIN_NAME | github.event.repository.name }}
+          pinName: ${{ secrets.PIN_NAME || github.event.repository.name }}
           pinataKey: ${{ secrets.PINATA_KEY }}
           pinataSecret: ${{ secrets.PINATA_SECRET }}
