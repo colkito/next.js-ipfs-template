@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Inter } from '@next/font/google'
+import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -13,6 +14,23 @@ export default function Example() {
             Get started by editing&nbsp;
             <code className={styles.code}>pages/example.tsx</code>
           </p>
+          <div>
+            <a
+              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              By{' '}
+              <Image
+                src="/vercel.svg"
+                alt="Vercel Logo"
+                className={styles.vercelLogo}
+                width={100}
+                height={24}
+                priority
+              />
+            </a>
+          </div>
         </div>
 
         <div className={styles.center}>
@@ -24,7 +42,9 @@ export default function Example() {
             <h2 className={inter.className}>
               Home <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>Test navigation to home page with this link.</p>
+            <p className={inter.className}>
+              Test navigation to home page with this link.
+            </p>
           </Link>
 
           <Link href="/deploy" className={styles.card}>
