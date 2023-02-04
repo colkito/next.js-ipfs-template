@@ -1,4 +1,4 @@
-name: Depoy main branch to IPFS
+name: Deploy main branch to IPFS
 
 on:
   push:
