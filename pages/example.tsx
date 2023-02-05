@@ -1,9 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Example() {
   return (
@@ -22,7 +19,7 @@ export default function Example() {
             >
               By{' '}
               <Image
-                src="/images/vercel.svg"
+                src="./images/vercel.svg"
                 alt="Vercel Logo"
                 className={styles.vercelLogo}
                 width={100}
@@ -39,21 +36,17 @@ export default function Example() {
 
         <div className={styles.grid}>
           <Link href="/" className={styles.card}>
-            <h2 className={inter.className}>
+            <h2>
               Home <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>
-              Test navigation to home page with this link.
-            </p>
+            <p>Test navigation to home page with this link.</p>
           </Link>
 
           <Link href="/deploy" className={styles.card}>
-            <h2 className={inter.className}>
+            <h2>
               Deploy <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>
-              Learn how to deploy this static page on IPFS.
-            </p>
+            <p>Learn how to deploy this static page on IPFS.</p>
           </Link>
 
           <a
@@ -62,10 +55,10 @@ export default function Example() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>
+            <h2>
               Docs <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>
+            <p>
               Find in-depth information about Next.js features and&nbsp;API.
             </p>
           </a>
@@ -76,10 +69,10 @@ export default function Example() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className={inter.className}>
+            <h2>
               Learn <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>
+            <p>
               Learn about Next.js in an interactive course with&nbsp;quizzes!
             </p>
           </a>
