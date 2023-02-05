@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Inter } from '@next/font/google'
+import Link from '@/components/IPFSLink'
 import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -65,14 +65,18 @@ export default function Home() {
             <h2 className={inter.className}>
               Example Page <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>Test navigation to the example page with this link.</p>
+            <p className={inter.className}>
+              Test navigation to the example page with this link.
+            </p>
           </Link>
 
           <Link href="/deploy" className={styles.card}>
             <h2 className={inter.className}>
               Deploy <span>-&gt;</span>
             </h2>
-            <p className={inter.className}>Learn how to deploy this static page on IPFS.</p>
+            <p className={inter.className}>
+              Learn how to deploy this static page on IPFS.
+            </p>
           </Link>
 
           <a
