@@ -49,7 +49,7 @@ export default function Example() {
             <p>Learn how to deploy this static page on IPFS.</p>
           </Link>
 
-          <a
+          <Link
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
             target="_blank"
@@ -61,7 +61,7 @@ export default function Example() {
             <p>
               Find in-depth information about Next.js features and&nbsp;API.
             </p>
-          </a>
+          </Link>
 
           <a
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"

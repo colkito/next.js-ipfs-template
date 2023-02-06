@@ -4,6 +4,8 @@ import { useMemo } from 'react'
 export type IPFSLinkProps = LinkProps & {
   children?: React.ReactNode
   className?: string
+  target?: string
+  rel?: string
 }
 
 // based on https://github.com/Velenir/nextjs-ipfs-example#deploying-nextjs-site-to-ipfs
@@ -11,8 +13,8 @@ const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
   const newAs = useMemo(() => {
     let baseURIAs = (as || href) as string
 
-    if (baseURIAs.startsWith('/')) {
-      const { pathname } = window.location
+    if (baseURIAs.startsWith('/') && typeof document !== 'undefined') {
+      const { pathname } = document.location
       const ipfsRegex = new RegExp('^/ipfs/(Qm[a-zA-Z0-9]{44})')
       const ipfsMatch = ipfsRegex.exec(pathname)
 
