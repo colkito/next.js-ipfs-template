@@ -8,7 +8,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <Script src="/ipfsBaseHref.js" strategy="beforeInteractive" />
+        <Script src="./ipfsBaseHref.js" strategy="beforeInteractive" />
       </body>
     </Html>
   )
