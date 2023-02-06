@@ -9,7 +9,7 @@ const cspHashOf = (text: string) => {
 }
 
 export default function Document(ctx: HtmlProps) {
-  const cspContent = `default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'unsafe-inline' 'unsafe-eval' 'self' ${cspHashOf(
+  const cspContent = `default-src 'self'; script-src 'self' ${cspHashOf(
     NextScript.getInlineScriptSource(ctx)
   )}`
 
