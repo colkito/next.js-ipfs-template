@@ -1,26 +1,14 @@
-import crypto from 'crypto'
-import { HtmlProps } from 'next/dist/shared/lib/html-context'
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
-const cspHashOf = (text: string) => {
-  const hash = crypto.createHash('sha256')
-  hash.update(text)
-  return `'sha256-${hash.digest('base64')}'`
-}
-
-export default function Document(ctx: HtmlProps) {
-  const cspContent = `default-src 'self'; script-src 'self' ${cspHashOf(
-    NextScript.getInlineScriptSource(ctx)
-  )}`
-
+export default function Document() {
   return (
     <Html lang="en">
-      <Head>
-        <meta httpEquiv="Content-Security-Policy" content={cspContent} />
-      </Head>
+      <Head />
       <body>
         <Main />
         <NextScript />
+        <Script src="/ipfsBaseHref.js" strategy="beforeInteractive" />
       </body>
     </Html>
   )
