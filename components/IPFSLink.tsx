@@ -11,7 +11,7 @@ export type IPFSLinkProps = LinkProps & {
 // based on https://github.com/Velenir/nextjs-ipfs-example#deploying-nextjs-site-to-ipfs
 const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
   const newAs = useMemo(() => {
-    let asHref = (as || href) as string
+    const asHref = (as || href) as string
 
     if (asHref.startsWith('/') && typeof document !== 'undefined') {
       const { pathname } = document.location
@@ -21,7 +21,7 @@ const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
       if (ipfsMatch) {
         const slashRegex = new RegExp('/$')
         const ipfsPathname = ipfsMatch[0].replace(slashRegex, '')
-        asHref = `${ipfsPathname}${asHref}`
+        return `${ipfsPathname}${asHref}`
         // <IPFSLink href="/about"> => <a class="jsx-2055897931" href="/ipfs/Qm<hash>/about">About</a>
       }
     }
@@ -29,7 +29,7 @@ const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
     return asHref
   }, [as, href])
 
-  return <Link {...rest} href={href} as={newAs} />
+  return <Link {...rest} href={newAs} as={newAs} />
 }
 
 export default IPFSLink
