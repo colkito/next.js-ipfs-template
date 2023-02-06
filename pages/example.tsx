@@ -19,7 +19,7 @@ export default function Example() {
             >
               By{' '}
               <Image
-                src="./images/vercel.svg"
+                src="/images/vercel.svg"
                 alt="Vercel Logo"
                 className={styles.vercelLogo}
                 width={100}

@@ -65,7 +65,7 @@ export default function Home() {
             <p>Test navigation to the example page with this link.</p>
           </Link>
 
-          <Link href="/deploy" className={styles.card}>
+          <Link href="./deploy" className={styles.card}>
             <h2>
               Deploy <span>-&gt;</span>
             </h2>

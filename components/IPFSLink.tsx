@@ -1,16 +1,6 @@
 import Link, { LinkProps } from 'next/link'
 import { useMemo } from 'react'
 
-function resolve(from: string, to: string) {
-  const resolvedUrl = new URL(to, new URL(from, 'resolve://'))
-  if (resolvedUrl.protocol === 'resolve:') {
-    // `from` is a relative URL.
-    const { pathname, search, hash } = resolvedUrl
-    return pathname + search + hash
-  }
-  return resolvedUrl.toString()
-}
-
 export type IPFSLinkProps = LinkProps & {
   children?: React.ReactNode
   className?: string
@@ -19,22 +9,20 @@ export type IPFSLinkProps = LinkProps & {
 // based on https://github.com/Velenir/nextjs-ipfs-example#deploying-nextjs-site-to-ipfs
 const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
   const newAs = useMemo(() => {
-    let baseURI_as = (as || href) as string
+    let baseURIAs = (as || href) as string
 
-    // make absolute url relative when displayed in url bar
-    if (baseURI_as.startsWith('/')) {
-      //  for static html compilation
-      baseURI_as = '.' + href
-      // <IPFSLink href="/about"> => <a class="jsx-2055897931" href="./about">About</a>
+    if (baseURIAs.startsWith('/')) {
+      const { pathname } = window.location
+      const ipfsRegex = new RegExp('^/ipfs/(Qm[a-zA-Z0-9]{44})')
+      const ipfsMatch = ipfsRegex.exec(pathname)
 
-      // document is unavailable when compiling on the server
-      if (typeof document !== 'undefined') {
-        baseURI_as = resolve(document.baseURI, baseURI_as)
-        // => <a href="https://gateway.ipfs.io/ipfs/Qm<hash>/about">About</a>
+      if (ipfsMatch) {
+        baseURIAs = `${ipfsMatch[0]}/${baseURIAs}`
+        // <IPFSLink href="/about"> => <a class="jsx-2055897931" href="/ipfs/Qm<hash>/about">About</a>
       }
     }
 
-    return baseURI_as
+    return baseURIAs
   }, [as, href])
 
   return <Link {...rest} href={href} as={newAs} />
