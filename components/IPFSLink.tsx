@@ -29,7 +29,7 @@ const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
     return asHref
   }, [as, href])
 
-  return <Link {...rest} href={newAs} as={newAs} />
+  return <Link {...rest} href={newAs} />
 }
 
 export default IPFSLink
