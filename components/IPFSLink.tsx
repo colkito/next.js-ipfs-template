@@ -2,7 +2,14 @@ import Link, { LinkProps } from 'next/link'
 import { useMemo } from 'react'
 import { resolve } from 'url'
 
-const IPFSLink = ({ href, as, ...rest }: LinkProps) => {
+export type IPFSLinkProps = LinkProps & {
+  children?: React.ReactNode
+  className?: string
+  target?: string
+  rel?: string
+}
+
+const IPFSLink = ({ href, as, ...rest }: IPFSLinkProps) => {
   const newAs = useMemo(() => {
     let baseURI_as = (as || href) as string
 
