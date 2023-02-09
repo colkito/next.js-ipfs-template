@@ -1,9 +1,8 @@
 import Link, { LinkProps } from 'next/link'
 import { useMemo } from 'react'
-import {resolve} from 'url'
+import { resolve } from 'url'
 
-const IPFSLink = ({href, as, ...rest}: LinkProps) => {
-
+const IPFSLink = ({ href, as, ...rest }: LinkProps) => {
   const newAs = useMemo(() => {
     let baseURI_as = (as || href) as string
 
@@ -15,7 +14,7 @@ const IPFSLink = ({href, as, ...rest}: LinkProps) => {
       // <IPFSLink href="/about"> => <a class="jsx-2055897931" href="./about">About</a>
 
       // on the client
-    //   document is unavailable when compiling on the server
+      // document is unavailable when compiling on the server
       if (typeof document !== 'undefined') {
         baseURI_as = resolve(document.baseURI, baseURI_as)
         // => <a href="https://gateway.ipfs.io/ipfs/Qm<hash>/about">About</a>
@@ -26,3 +25,5 @@ const IPFSLink = ({href, as, ...rest}: LinkProps) => {
 
   return <Link {...rest} href={href} as={newAs} />
 }
+
+export default IPFSLink
