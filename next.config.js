@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  assetPrefix: './',
-  prefetch: false,
+  assetPrefix: '/',
   reactStrictMode: true,
   trailingSlash: true,
   images: {
