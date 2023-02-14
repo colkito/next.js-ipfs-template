@@ -5,19 +5,33 @@ on:
     branches:
       - main
 
+env:
+  NODE_VERSION: 18
+
 jobs:
   deploy-ipfs:
-    name: Build and deploy to IPFS
+    name: Deploy to IPFS
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [${{ env.NODE_VERSION }}]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Use pre-built Node.js image
+        uses: actions/node@v3
         with:
-          node-version: 16
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies
         run: yarn install
@@ -25,7 +39,7 @@ jobs:
       - name: Build and optimize the code
         run: yarn build
 
-      - name: Export production ready code
+      - name: Export production-ready code
         run: yarn export
 
       - name: Improve static for IPFS
