@@ -1,16 +1,6 @@
 import { memo } from 'react'
 import Link, { LinkProps } from 'next/link'
 
-function resolve(from: string, to: string) {
-  const resolvedUrl = new URL(to, new URL(from, 'resolve:/'))
-  if (resolvedUrl.protocol === 'resolve:') {
-    // `from` is a relative URL.
-    const { pathname, search, hash } = resolvedUrl
-    return pathname + search + hash
-  }
-  return resolvedUrl.toString()
-}
-
 export interface LinkIPSFProps extends LinkProps {
   href: string
   as?: string
@@ -50,7 +40,6 @@ const LinkIPFS = ({ href, as, ...rest }: LinkIPSFProps) => {
   // Otherwise, this is an external link that we can add on good security defaults for
   return (
     <a
-      data-link-external
       href={baseAsHref}
       target="_blank"
       rel="noopener noreferrer nofollow"
