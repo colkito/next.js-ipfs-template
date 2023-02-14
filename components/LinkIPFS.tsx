@@ -31,7 +31,7 @@ const LinkIPFS = ({ href, as, ...rest }: LinkIPSFProps) => {
 
     const newAs = `.${baseAsHref}`
     console.log('internal link', baseAsHref, newAs)
-    return <Link {...rest} href={href} as={newAs} />
+    return <Link {...rest} href={newAs} />
   }
 
   // Treat urls that aren't http protocols as "normal" links. This is useful for things like mailto: or tel:
