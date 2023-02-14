@@ -2,13 +2,13 @@ import { memo } from 'react'
 import Link, { LinkProps } from 'next/link'
 
 function resolve(from: string, to: string) {
-  const resolvedUrl = new URL(to, new URL(from, 'resolve://'));
+  const resolvedUrl = new URL(to, new URL(from, 'resolve:/'))
   if (resolvedUrl.protocol === 'resolve:') {
     // `from` is a relative URL.
-    const { pathname, search, hash } = resolvedUrl;
-    return pathname + search + hash;
+    const { pathname, search, hash } = resolvedUrl
+    return pathname + search + hash
   }
-  return resolvedUrl.toString();
+  return resolvedUrl.toString()
 }
 
 export interface LinkIPSFProps extends LinkProps {
@@ -25,9 +25,15 @@ const LinkIPFS = ({ href, as, ...rest }: LinkIPSFProps) => {
   console.log('LinkIPFS baseAsHref', baseAsHref)
 
   // If our link is relative, we can assume it's an internal link and use `next/link`
-  if (baseAsHref.startsWith('.') || baseAsHref.startsWith('/')) {
-    if (typeof document !== 'undefined') {
-      const newAs = resolve(window.location.pathname, baseAsHref)
+  if (baseAsHref.startsWith('/') && typeof document !== 'undefined') {
+    const { pathname } = document.location
+    const ipfsRegex = new RegExp('^/ipfs/(Qm[a-zA-Z0-9]{44})')
+    const ipfsMatch = ipfsRegex.exec(pathname)
+    if (ipfsMatch) {
+      const slashRegex = new RegExp('/$')
+      const ipfsPathname = ipfsMatch[0].replace(slashRegex, '')
+      const newAs = `${ipfsPathname}${baseAsHref}`
+
       console.log('internal link newAs', baseAsHref, href, newAs)
       return <Link {...rest} href={href} as={newAs} />
     }
