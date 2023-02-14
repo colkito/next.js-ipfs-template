@@ -15,7 +15,8 @@ const LinkIPFS = ({ href, as, ...rest }: LinkIPSFProps) => {
   console.log('LinkIPFS baseAsHref', baseAsHref)
 
   // If our link is relative, we can assume it's an internal link and use `next/link`
-  if (baseAsHref.startsWith('/') && typeof document !== 'undefined') {
+  if (baseAsHref.startsWith('/')) {
+    // && typeof document !== 'undefined'
     // const { pathname } = document.location
     // const ipfsRegex = new RegExp('^/ipfs/(Qm[a-zA-Z0-9]{44})')
     // const ipfsMatch = ipfsRegex.exec(pathname)
@@ -30,7 +31,7 @@ const LinkIPFS = ({ href, as, ...rest }: LinkIPSFProps) => {
 
     const newAs = `.${baseAsHref}`
     console.log('internal link', baseAsHref, newAs)
-    return <Link {...rest} href={newAs} as={newAs} />
+    return <Link {...rest} href={href} as={newAs} />
   }
 
   // Treat urls that aren't http protocols as "normal" links. This is useful for things like mailto: or tel:
