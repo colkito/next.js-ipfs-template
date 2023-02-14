@@ -1,6 +1,16 @@
 import { memo } from 'react'
 import Link, { LinkProps } from 'next/link'
 
+function resolve(from: string, to: string) {
+  const resolvedUrl = new URL(to, new URL(from, 'resolve://'));
+  if (resolvedUrl.protocol === 'resolve:') {
+    // `from` is a relative URL.
+    const { pathname, search, hash } = resolvedUrl;
+    return pathname + search + hash;
+  }
+  return resolvedUrl.toString();
+}
+
 export interface LinkIPSFProps extends LinkProps {
   href: string
   as?: string
@@ -16,8 +26,14 @@ const LinkIPFS = ({ href, as, ...rest }: LinkIPSFProps) => {
 
   // If our link is relative, we can assume it's an internal link and use `next/link`
   if (baseAsHref.startsWith('.') || baseAsHref.startsWith('/')) {
+    if (typeof document !== 'undefined') {
+      const newAs = resolve(window.location.pathname, baseAsHref)
+      console.log('internal link newAs', baseAsHref, href, newAs)
+      return <Link {...rest} href={href} as={newAs} />
+    }
+
     console.log('internal link', baseAsHref)
-    return <Link {...rest} href={baseAsHref} as={baseAsHref} />
+    return <Link {...rest} href={href} as={baseAsHref} />
   }
 
   // Treat urls that aren't http protocols as "normal" links. This is useful for things like mailto: or tel:
